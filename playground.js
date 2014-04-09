@@ -1,9 +1,19 @@
-var registry = require('./lib/resolvers/registry')
+var resolver = require('./lib/resolvers/resolver')
 
-registry.stream('http://registry.npmjs.org/', 'express', '4.0.0').then(function(provides) {
-  setTimeout(function() {
-    provides.pipe(process.stdout)
-  }, 500)
+resolver.create('sequence', [
+  {
+    type: 'registry',
+    params: ['http://registry.npmjs.eu/']
+  },
+  {
+    type: 'registry',
+    params: ['http://registry.npmjs.org/']
+  }
+]).then(function(r) {
+  return r.provides('express').then(function(provides) {
+    console.log('provides', provides)
+  })
 }).fail(function(err) {
   console.error(err)
+  console.error(err.stack)
 })
