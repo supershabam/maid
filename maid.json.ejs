@@ -1,0 +1,31 @@
+{
+  "resolver": {
+    "type"   : "sequence",
+    "params" : [
+      {
+        "type"   : "s3",
+        "params" : [
+          {
+            "access_key" : "<%= AWS_ACCESS_KEY %>",
+            "secret"     : "<%= AWS_SECRET_KEY %>"
+          }
+        ]
+      },
+      {
+        "type"   : "registry",
+        "params" : [
+          "http://registry.npmjs.org"
+        ]
+      }
+    ]
+  },
+  "publisher": {
+    "type"   : "s3",
+    "params" : [
+      {
+        "access_key" : "<%= AWS_ACCESS_KEY %>",
+        "secret"     : "<%= AWS_SECRET_KEY %>"
+      }
+    ]
+  }
+}
