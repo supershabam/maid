@@ -10,8 +10,9 @@ resolver.create('sequence', [
     params: ['http://registry.npmjs.org/']
   }
 ]).then(function(r) {
-  return r.provides('express').then(function(provides) {
-    console.log('provides', provides)
+  return r.stream('express', '3.0.0').then(function(s) {
+    // console.log(s)
+    s.pipe(process.stdout)
   })
 }).fail(function(err) {
   console.error(err)
